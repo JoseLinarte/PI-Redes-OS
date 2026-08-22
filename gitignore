@@ -1,0 +1,26 @@
+# Objetos y binarios de compilación C/C++
+*.o
+*.obj
+*.out
+*.exe
+*.a
+*.so
+
+# Directorios de build
+build/
+bin/
+obj/
+
+# Archivos de editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs y temporales
+*.log
+*.tmp
