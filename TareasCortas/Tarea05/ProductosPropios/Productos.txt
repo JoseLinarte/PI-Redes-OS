@@ -1,0 +1,13 @@
+ISLA3
+
+Lista de productos - inventario
+
+producto            cantidad   precio unitario (CRC)   categoria
+cantones             50        800                     snack
+birra                 96        1200                    bebida
+pacha                 24        3500                    licor
+guaro                 12        6000                    licor
+refresco              60        700                     bebida
+papas                 40        900                     snack
+hielo                 30        1500                    otros
+chicharrones          25        1000                    snack
