@@ -1,0 +1,97 @@
+# SSLSocket — Servidor SSL (fork/hilos) + Cliente
+
+## Cómo funciona (resumen general)
+
+Es el mismo modelo cliente/servidor de las entregas anteriores, pero ahora
+la comunicación va cifrada con SSL/TLS en vez de texto plano. La clase
+`SSLSocket` hereda de `Socket`/`VSocket` y reemplaza `Connect`, `Read` y
+`Write` para que pasen por OpenSSL, agregando además el handshake SSL
+(`Accept` del lado servidor, `SSL_connect` del lado cliente).
+
+Hay dos servidores de prueba (mismo protocolo, distinto modelo de
+atención) y un cliente:
+
+- `ThreadSSLServer.out` — atiende cada conexión en un hilo nuevo.
+- `ForkSSLServer.out` — atiende cada conexión creando un proceso nuevo.
+- `SSLClient.out` — se conecta, manda usuario/contraseña, y muestra la
+  respuesta del servidor.
+
+El servidor solo acepta como válidas las credenciales `piro` / `ci0123`
+(están fijas en el código de prueba); cualquier otra combinación devuelve
+"Invalid Message".
+
+## Generar el certificado (una sola vez, antes de compilar)
+
+```bash
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout key0123.pem -out ci0123.pem
+```
+
+Esto crea `ci0123.pem` (certificado) y `key0123.pem` (llave privada) en la
+carpeta actual. Podés dejar en blanco casi todos los datos que te pida
+(país, organización, etc.), no afecta las pruebas locales.
+
+## Compilar
+
+```bash
+make clean
+make
+```
+
+Genera tres ejecutables: `ThreadSSLServer.out`, `ForkSSLServer.out` y
+`SSLClient.out`.
+
+Si `make` se queja de `openssl/ssl.h` no encontrado, instalá las cabeceras
+de desarrollo de OpenSSL (en Fedora: `sudo dnf install openssl-devel`).
+
+## Ejecutar
+
+Se necesitan **dos terminales**, y `ci0123.pem`/`key0123.pem` deben estar
+en la misma carpeta donde corras el servidor.
+
+### Prueba con hilos
+
+**Terminal 1:**
+```bash
+./ThreadSSLServer.out 4321 -6
+```
+
+**Terminal 2:**
+```bash
+./SSLClient.out ::1 4321 -6
+```
+Te pide usuario y contraseña por consola — poné `piro` y `ci0123` para ver
+la respuesta exitosa del servidor (con la info del certificado y el cifrado
+negociado impresos antes).
+
+Detener el servidor: `Ctrl+C` en Terminal 1.
+
+### Prueba con fork
+
+**Terminal 1:**
+```bash
+./ForkSSLServer.out 4321 -6
+```
+
+**Terminal 2:**
+```bash
+./SSLClient.out ::1 4321 -6
+```
+
+Mismo comportamiento esperado que con hilos.
+
+### Usar otro puerto
+
+Ambos servidores aceptan el puerto como argumento opcional:
+
+```bash
+./ThreadSSLServer.out 5000
+```
+```bash
+./SSLClient.out 127.0.0.1 5000
+```
+
+## Limpiar
+
+```bash
+make clean
+```
