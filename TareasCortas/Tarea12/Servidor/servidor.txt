@@ -1,0 +1,6 @@
+[2026-10-06 09:34:58] GET /TicAmazon/list.php | listar categorias -> 200 OK
+[2026-10-06 09:35:25] GET /TicAmazon/list.php | listar categorias -> 200 OK
+[2026-10-06 09:35:30] GET /TicAmazon/list.php | categoria: 'Salud y belleza' -> 200 OK
+[2026-10-06 09:35:34] GET /TicAmazon/list.php | listar categorias -> 200 OK
+[2026-10-06 09:35:37] GET /TicAmazon/list.php | categoria: 'Electronica' -> 200 OK
+[2026-10-06 09:35:43] POST /TicAmazon/proforma.php | 1 item(s): pantalla x2 (Electronica) -> 200 OK
