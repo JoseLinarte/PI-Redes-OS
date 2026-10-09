@@ -1,0 +1,397 @@
+
+Switch>enab    hostname ISLA3     SW-   ISLA3
+        ^
+% Invalid input detected at '^' marker.
+
+Switch>enable
+Switch#host    enablehostname ISLA3
+        ^
+% Invalid input detected at '^' marker.
+
+Switch# h   configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#h hostname ISLA3
+ISLA3(config)#no ip domain-looup
+                              ^
+% Invalid input detected at '^' marker.
+
+ISLA3(config)#no ip domain-looupkupup
+ISLA3(config)#vlan2  230
+ISLA3(config-vlan)#name ISLA3
+ISLA3(config-vlan)#exit
+ISLA3(config)#interface range FastEthernet0/1-  - 24
+ISLA3(config-if-range)#switch pot rt       port mode access
+ISLA3(config-if-range)#switchport mode access           vlan      access vlan 230
+ISLA3(config-if-range)#spanning  -tee    ree portfast
+%Warning: portfast should only be enabled on ports connected to a single
+ host. Connecting hubs, concentrators, switches, bridges, etc... to this
+ interface  when portfast is enabled, can cause temporary bridging loops.
+ Use with CAUTION
+
+%Portfast will be configured in 24 interfaces due to the range command 
+ but will only have effect when the interfaces are in a non-trunking mode.
+ISLA3(config-if-range)#no shutdown
+ISLA3(config-if-range)#exit
+ISLA3(config)#interface Vlan230
+ISLA3(config-if)#
+*Mar  1 00:37:10.706: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan230, changed state to upip add      
+ISLA3(config-if)#ip   address 1 172.16.123.48  50 255  .  255.255.230
+Bad mask 0xFFFFFFE6 for address 172.16.123.50
+ISLA3(config-if)#
+*Mar  1 00:38:49.885: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed state to down
+*Mar  1 00:38:49.885: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan230, changed state to down
+*Mar  1 00:38:50.875: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to down
+*Mar  1 00:38:51.881: %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to down
+*Mar  1 00:39:54.838: %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to up
+*Mar  1 00:39:55.845: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up
+*Mar  1 00:40:06.951: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to down
+*Mar  1 00:40:07.958: %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to down
+ISLA3(config-if)#ip address 172.16.123.50 255.255.255.230  40
+ISLA3(config-if)#no shut
+*Mar  1 00:40:38.912: %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to updown
+*Mar  1 00:40:41.000: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up           
+ISLA3(config-if)#no shutdowm n
+ISLA3(config-if)#exit
+ISLA3(config)#
+*Mar  1 00:41:10.017: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed state to up
+*Mar  1 00:41:10.017: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan230, changed state to upi 
+ISLA3(config)#interface GigabitEthernet0/1
+ISLA3(config-if)#switchport mode trunk
+ISLA3(config-if)#switchport mode trunk          trunk allowed vlan 230
+ISLA3(config-if)#
+*Mar  1 00:42:16.471: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed state to down
+ISLA3(config-if)#no shur tdown
+ISLA3(config-if)#exit
+ISLA3(config)#exitno shutdownswitchport trunk allowed vlan 230mode trunk            interface GigabitEthernet0/1exit                        no shutdownip address 172.16.123.50 255.255.255.24030nterface Vlan230                       
+ISLA3(config-if)#interface Vlan230exit             no shutdownswitchport trunk allowed vlan 230mode trunk            interface GigabitEthernet0/1exit                        no shutdownip address 172.16.123.50 255.255.255.2403040
+ISLA3(config-if)#ip address 172.16.123.50 255.255.255.240nterface Vlan230                       exit             no shutdown
+ISLA3(config-if)#exit
+ISLA3(config)#interface Vlan23   230                  ip default  -gateaway    way 172.16.123.49
+ISLA3(config)#ip dhcp excluede    uded-address 172.16.123.49 172.16.123.54
+ISLA3(config)#ip dhacp   cp pol ol ISLA3
+ISLA3(dhcp-config)#network 172.16.123.48
+*Mar  1 00:45:09.763: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan230, changed state to down
+*Mar  1 00:45:10.753: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to down
+*Mar  1 00:45:11.760: %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to down
+ISLA3(dhcp-config)#network 172.16.123.48 255.255.255.240. 
+ISLA3(dhcp-config)#default-router 172.16.123.49
+ISLA3(dhcp-config)#exit
+ISLA3(config)#end
+ISLA3#
+*Mar  1 00:46:02.460: %SYS-5-CONFIG_I: Configured from console by consolecopy      
+ISLA3#copy runni
+*Mar  1 00:46:14.666: %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to upng  
+*Mar  1 00:46:16.671: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up            copy runnin
+*Mar  1 00:46:26.804: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to down
+*Mar  1 00:46:27.811: %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to down           
+ISLA3#copy running-config startuo-config-config p-config-config
+Destination filename [startup-config]? 
+Building configuration...
+[OK]
+0 bytes copied in 3.649 secs (0 bytes/sec)
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+*Mar  1 00:47:17.463: %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to up
+*Mar  1 00:47:19.468: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up
+*Mar  1 00:47:48.484: %LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan230, changed state to up
+ISLA3#show runnig ng-config
+Building configuration...
+
+Current configuration : 3358 bytes
+!
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname ISLA3
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+!
+no aaa new-model
+system mtu routing 1500
+ip dhcp excluded-address 172.16.123.49 172.16.123.54
+!
+ip dhcp pool ISLA3
+   network 172.16.123.48 255.255.255.240
+ --More--            default-router 172.16.123.49 
+ --More--         !
+ --More--         !
+ --More--         no ip domain-lookup
+ --More--         !
+ --More--         !
+ --More--         !
+ --More--         !
+ --More--         !
+ --More--         !
+ --More--         spanning-tree mode pvst
+ --More--         spanning-tree extend system-id
+ --More--         !
+ --More--         vlan internal allocation policy ascending
+ --More--         !
+ --More--         !
+ --More--         !
+ --More--         interface FastEthernet0/1
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/2
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/3
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/4
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/5
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/6
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/7
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/8
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/9
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/10
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/11
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/12
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/13
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/14
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/15
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/16
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/17
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/18
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/19
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/20
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/21
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/22
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/23
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface FastEthernet0/24
+ --More--          switchport access vlan 230
+ --More--          switchport mode access
+ --More--          spanning-tree portfast
+ --More--         !
+ --More--         interface GigabitEthernet0/1
+ --More--          switchport trunk allowed vlan 230
+ --More--          switchport mode trunk
+ --More--         !
+ --More--         interface GigabitEthernet0/2
+ --More--         !
+ --More--         interface Vlan1
+ --More--          no ip address
+ --More--         !
+ --More--         interface Vlan230
+ --More--          ip address 172.16.123.50 255.255.255.240
+ --More--         !
+ --More--         ip default-gateway 172.16.123.49
+ --More--         ip http server
+ --More--         ip http secure-server
+ --More--         !
+ --More--         line con 0
+ --More--         line vty 5 15
+ --More--         !
+ --More--         end
+ --More--         
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#show vlan brief
+
+VLAN Name                             Status    Ports
+---- -------------------------------- --------- -------------------------------
+1    default                          active    Gi0/2
+230  ISLA3                            active    Fa0/1, Fa0/2, Fa0/3, Fa0/4
+                                                Fa0/5, Fa0/6, Fa0/7, Fa0/8
+                                                Fa0/9, Fa0/10, Fa0/11, Fa0/12
+                                                Fa0/13, Fa0/14, Fa0/15, Fa0/16
+                                                Fa0/17, Fa0/18, Fa0/19, Fa0/20
+                                                Fa0/21, Fa0/22, Fa0/23, Fa0/24
+1002 fddi-default                     act/unsup 
+1003 token-ring-default               act/unsup 
+1004 fddinet-default                  act/unsup 
+1005 trnet-default                    act/unsup 
+ISLA3#show interfaces trunk
+
+Port        Mode             Encapsulation  Status        Native vlan
+Gi0/1       on               802.1q         trunking      1
+
+Port        Vlans allowed on trunk
+Gi0/1       230
+
+Port        Vlans allowed and active in management domain
+Gi0/1       230
+
+Port        Vlans in spanning tree forwarding state and not pruned
+Gi0/1       230
+ISLA3#show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol
+Vlan1                  unassigned      YES unset  up                    down    
+Vlan230                172.16.123.50   YES manual up                    up      
+FastEthernet0/1        unassigned      YES unset  down                  down    
+FastEthernet0/2        unassigned      YES unset  down                  down    
+FastEthernet0/3        unassigned      YES unset  down                  down    
+FastEthernet0/4        unassigned      YES unset  down                  down    
+FastEthernet0/5        unassigned      YES unset  down                  down    
+FastEthernet0/6        unassigned      YES unset  down                  down    
+FastEthernet0/7        unassigned      YES unset  down                  down    
+FastEthernet0/8        unassigned      YES unset  down                  down    
+FastEthernet0/9        unassigned      YES unset  down                  down    
+FastEthernet0/10       unassigned      YES unset  down                  down    
+FastEthernet0/11       unassigned      YES unset  down                  down    
+FastEthernet0/12       unassigned      YES unset  down                  down    
+FastEthernet0/13       unassigned      YES unset  down                  down    
+FastEthernet0/14       unassigned      YES unset  down                  down    
+FastEthernet0/15       unassigned      YES unset  down                  down    
+FastEthernet0/16       unassigned      YES unset  down                  down    
+FastEthernet0/17       unassigned      YES unset  down                  down    
+FastEthernet0/18       unassigned      YES unset  down                  down    
+FastEthernet0/19       unassigned      YES unset  down                  down    
+FastEthernet0/20       unassigned      YES unset  down                  down    
+ --More--         FastEthernet0/21       unassigned      YES unset  down                  down    
+ --More--         FastEthernet0/22       unassigned      YES unset  down                  down    
+ --More--         FastEthernet0/23       unassigned      YES unset  down                  down    
+ --More--         FastEthernet0/24       unassigned      YES unset  down                  down    
+ --More--         GigabitEthernet0/1     unassigned      YES unset  up                    up      
+ --More--         GigabitEthernet0/2     unassigned      YES unset  down                  down    
+ISLA3#
+ISLA3#
+ISLA3#
+ISLA3#ping ping 172.16           172.16.123.66
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 172.16.123.66, timeout is 2 seconds:
+.....
+Success rate is 0 percent (0/5)
+ISLA3#dubidubadudubi
+Translating "dubidubadudubi"
+% Unknown command or computer name, or unable to find computer address
+ISLA3#dubidubadudubiping 172.16.123.66
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 172.16.123.66, timeout is 2 seconds:
+.....
+Success rate is 0 percent (0/5)
+ISLA3#
