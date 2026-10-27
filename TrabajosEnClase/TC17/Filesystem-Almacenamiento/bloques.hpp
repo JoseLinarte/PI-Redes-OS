@@ -7,6 +7,11 @@ const int TAM_BLOQUE = 256;
 const int32_t TIPO_LIBRE = 0;
 const int32_t TIPO_DIRECTORIO = 1;
 const int32_t TIPO_DATOS = 2;
+const int32_t TIPO_INODO = 3;
+const int32_t TIPO_INDIRECTO = 4;
+
+const int NUM_DIRECTOS = 10;
+const int PUNTEROS_POR_INDIRECTO = 61;
 
 const int MAX_ENTRADAS_DIR = 10;
 const int TAM_NOMBRE_BODEGA = 20;
@@ -33,7 +38,7 @@ struct EncabezadoComun {
 
 struct EntradaDirectorio {
     char nombre_bodega[TAM_NOMBRE_BODEGA];
-    int32_t primer_bloque_datos;
+    int32_t bloque_inodo;
 };
 
 // Bloque 1 directorio
@@ -55,6 +60,20 @@ struct BloqueLibre {
     char sin_usar[TAM_TEXTO_DATOS];
 };
 
+struct BloqueInodo {
+    EncabezadoComun encabezado;                 // 12
+    int32_t cantidad_bloques_datos;             // 4  cuantos bloques de datos tiene la bodega
+    int32_t directos[NUM_DIRECTOS];             // 40 punteros directos a bloques de datos
+    int32_t indirecto;                          // 4  primer bloque indirecto (-1 si no hay)
+    char relleno[196];                          // 196
+};
+
+// Bloque tipo 4: bloque de punteros (indirecto)
+struct BloqueIndirecto {
+    EncabezadoComun encabezado;                 // bloque_siguiente = otro indirecto, cantidad_usada = punteros validos
+    int32_t punteros[PUNTEROS_POR_INDIRECTO];   // 244 bytes
+};
+
 // Un bloque generico
 // leer/escribir sin importar de que tipo sean.
 union Bloque {
@@ -62,6 +81,8 @@ union Bloque {
     BloqueDirectorio directorio;
     BloqueDatos datos;
     BloqueLibre libre;
+    BloqueInodo inodo;
+    BloqueIndirecto indirecto;
     char raw[TAM_BLOQUE];
 
     Bloque() { std::memset(raw, 0, TAM_BLOQUE); }
@@ -73,3 +94,5 @@ static_assert(sizeof(BloqueControl) == TAM_BLOQUE, "BloqueControl debe medir 256
 static_assert(sizeof(BloqueDirectorio) == TAM_BLOQUE, "BloqueDirectorio debe medir 256 bytes");
 static_assert(sizeof(BloqueDatos) == TAM_BLOQUE, "BloqueDatos debe medir 256 bytes");
 static_assert(sizeof(BloqueLibre) == TAM_BLOQUE, "BloqueLibre debe medir 256 bytes");
+static_assert(sizeof(BloqueInodo) == TAM_BLOQUE, "BloqueInodo debe medir 256 bytes");
+static_assert(sizeof(BloqueIndirecto) == TAM_BLOQUE, "BloqueIndirecto debe medir 256 bytes");
