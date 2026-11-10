@@ -182,7 +182,7 @@ std::string ServicioProductosDistribuido::AtenderIsla( const std::string & mensa
    }
    if ( tipo == "61" ) {
       if ( p.size() != 2 ) return "02/100";
-      IslaCaida( p[1] );
+            const_cast<ServicioProductosDistribuido *>( this )->IslaCaida( p[1] );
       return "01";
    }
    return "02/101";

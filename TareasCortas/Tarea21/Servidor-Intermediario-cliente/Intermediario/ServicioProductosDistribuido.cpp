@@ -234,7 +234,6 @@ RespuestaServicio ServicioProductosDistribuido::ListarProductos( const std::stri
    return Construir( 200, PaginasHtml::PaginaProductosDistribuidos( categoria, filas ) );
 }
 
-RespuestaServicio ServicioProductosDistribuido::GenerarProforma( const std::vector<SolicitudItem> & items ) const {
    Proforma ServicioProductosDistribuido::ComprarItems( const std::vector<SolicitudItem> & items ) const {
    Proforma validacion;
    std::map<std::string, std::vector<FilaProducto>> cache;     // servidor|categoria -> filas
